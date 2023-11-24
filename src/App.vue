@@ -1,0 +1,75 @@
+<template>
+  <router-view />
+</template>
+
+<script>
+import { defineComponent } from 'vue'
+import { useAppStore } from 'stores/app'
+import WsClient from 'src/utils/WsClient'
+
+export default defineComponent({
+  name: 'App',
+
+  // async для того, чтобы this.$q.ws.connect выполнилась асинхронно, дождаться соединения или ошибки соединения
+  async beforeMount () {
+
+    /** STORES **/
+    this.$q.appStore = useAppStore();
+
+    /** WS **/
+    this.$q.ws = new WsClient;
+    try {
+      await this.$q.ws.connect('ws://83.136.232.237:3031');
+    }
+    catch (e) {
+      console.log(e);
+      return;
+    }
+
+    /** AUTH c токеном, если токен уже есть в localStorage. Добавляется туда после успешного логина. **/
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.$q.ws.call(
+        'person',
+        'loginWithToken',
+        {
+          person: {
+            token
+          }
+        },
+        // success
+        (response) => {
+          // приходит готовый объект юзера типа
+          //
+          // active: false
+          // email: null
+          // id: 1
+          // isDeleted: false
+          // name: "Super"
+          // patronymic : "Super"
+          // phone: "+7 (000) 000-00-00"
+          // roleId: 1
+          // surname: "Super"
+          // token: "605eb9ad-6e2a-4a8a-a29a-81132f42c0f8"
+          //
+          // Сохраняем его в хранилище app юзеру
+          this.$q.appStore.user = response;
+          // Добавляем токен в localStorage
+          localStorage.setItem('token', response.token);
+          // Указываем в хранилище, что приложение готово, всё нужное сделано
+          this.$q.appStore.ready = true;
+        },
+        // error
+        (error) => {
+          console.log('error', error);
+          localStorage.removeItem('token');
+          this.$q.appStore.ready = true;
+        }
+      );
+    }
+    else {
+      this.$q.appStore.ready = true;
+    }
+  }
+})
+</script>
