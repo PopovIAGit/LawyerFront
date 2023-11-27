@@ -1,7 +1,8 @@
 <template>
-  <div class="login-window">
+  <div class="registr-component">
     <q-card >
-      <q-form @submit="onSubmitLoginForm">
+
+      <q-form @submit="onSubmitRegistrForm">
 
         <h4>Аторизация</h4>
         <q-input
@@ -47,7 +48,7 @@
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'LoginWindow',
+  name: 'RegistrComponent',
   setup () {
     return {
       phone: ref('+7 (000) 000-00-00'),
@@ -56,7 +57,7 @@ export default defineComponent({
   },
 
   methods: {
-    onSubmitLoginForm () {
+    onSubmitRegistrForm () {
       this.$q.ws.call(
         'person',
         'login',

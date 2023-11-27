@@ -1,3 +1,4 @@
+
 <template>
   <router-view />
 </template>
@@ -9,6 +10,7 @@ import WsClient from 'src/utils/WsClient'
 
 export default defineComponent({
   name: 'App',
+
 
   // async для того, чтобы this.$q.ws.connect выполнилась асинхронно, дождаться соединения или ошибки соединения
   async beforeMount () {

@@ -1,6 +1,6 @@
 <template>
 
-  <login-window v-if="this.$q.appStore.ready && !this.$q.appStore.user"/>
+  <login-component v-if="this.$q.appStore.ready && !this.$q.appStore.user"/>
 
   <q-layout view="lHh Lpr lFf" v-if="this.$q.appStore.ready && this.$q.appStore.user">
 
@@ -39,15 +39,14 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import LoginWindow from 'src/components/LoginWindow.vue'
+import LoginComponent from 'src/components/LoginComponent.vue'
 
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    LoginWindow
-
+    LoginComponent
   },
 
   setup () {
