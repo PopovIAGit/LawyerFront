@@ -1,68 +1,77 @@
 <template>
   <div class="login-component">
     <q-card>
-      <q-form @submit="onSubmitLoginForm">
-        <h4>Авторизация</h4>
-        <q-input
-          class="q-mb-md"
-          outlined
-          autofocus
-          hide-bottom-space
-          type="tel"
-          v-model="phoneNumber"
-          :mask="phoneMask"
-          unmasked-value
-          :placeholder="formattedPlaceholder"
-          label="Телефон"
-          @update:model-value="formatPhoneNumber"
-          :rules="[(val) => val && val.length >= 0]"
-        >
-          <template v-slot:prepend>
-            <q-icon name="phone" />
-          </template>
-        </q-input>
-        <q-input
-          class="q-mb-md"
-          outlined
-          hide-bottom-space
-          v-model="password"
-          type="password"
-          label="Пароль"
-          :rules="[(val) => val && val.length >= 5]"
-        >
-          <template v-slot:prepend>
-            <q-icon name="lock" />
-          </template>
-        </q-input>
-        <q-card-section class="text-center q-pt-none">
-          <div>
-            <a href="#" class="text-grey-8" style="text-decoration: none"
-              >Забыли пароль?</a
-            >
-          </div>
-        </q-card-section>
-        <q-btn
-          class="q-btn--lg q-mt-md"
-          unelevated
-          color="primary"
-          type="submit"
-          label="Войти"
-        />
+      <q-card-actions vertical>
+        <q-form @submit="onSubmitLoginForm">
+          <h4>Вход</h4>
+          <q-input
+            class="q-mb-md"
+            outlined
+            autofocus
+            hide-bottom-space
+            type="tel"
+            v-model="phoneNumber"
+            :mask="phoneMask"
+            unmasked-value
+            :placeholder="formattedPlaceholder"
+            label="Телефон"
+            @update:model-value="formatPhoneNumber"
+            :rules="[(val) => val && val.length >= 11]"
+          >
+            <template v-slot:prepend>
+              <q-icon name="phone" />
+            </template>
+          </q-input>
+          <q-input
+            class="q-mb-md"
+            outlined
+            hide-bottom-space
+            v-model="password"
+            :type="isPwd ? 'password' : 'text'"
+            label="Пароль"
+            :rules="[(val) => val && val.length >= 5]"
+          >
+            <template v-slot:prepend>
+              <q-icon name="lock" />
+            </template>
+            <template v-slot:append>
+              <q-icon
+                :name="isPwd ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="isPwd = !isPwd"
+              />
+            </template>
+          </q-input>
+          <q-card-section class="text-center q-pt-none">
+          </q-card-section>
+          <q-btn
+            class="q-btn--lg q-mt-md"
+            unelevated
+            color="primary"
+            type="submit"
+            label="Войти"
+          />
+        </q-form>
+        <div class="containerForHrefReg">
+              <span>
+                <a
+                  href="#"
+                  class = "containerForHrefRegLeft"
+                  @click="forgotPassword"
+                  >Забыли пароль?
+                </a>
+              </span>
 
-        <hr>
-
-        <q-btn
-          class="q-btn--lg q-mt-md"
-          unelevated
-          outlined
-          disable
-          color="primary"
-          type="submit"
-          label="Регистрация"
-        />
-
-
-      </q-form>
+              <span>
+                <a
+                  href="#"
+                  class = "containerForHrefRegRight"
+                  @click="toggleToRegistration"
+                  >Регистрация
+                </a>
+              </span>
+            </div>
+      </q-card-actions>
     </q-card>
   </div>
 </template>
@@ -71,12 +80,16 @@
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({
+
+
   name: "LoginComponent",
   setup() {
+
     return {
-      phoneNumber: ref("79234046955"),
-      password: ref("771665"),
+      phoneNumber: ref("79234046955"), //TODO обнулить
+      password: ref("771665"), //TODO обнулить
       phoneMask: "+# (###) ### - ####",
+      isPwd: ref(true),
     };
   },
 
@@ -87,10 +100,18 @@ export default defineComponent({
   },
 
   methods: {
+    forgotPassword(){
+      console.log("заглушка");
+    },
+
     formatPhoneNumber() {
       if (this.phoneNumber.length === 1) {
         this.phoneNumber = "7";
       }
+    },
+
+    toggleToRegistration(){
+      this.$q.appStore.toggleRegistrationForm();
     },
 
     onSubmitLoginForm() {

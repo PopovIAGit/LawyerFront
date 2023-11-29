@@ -128,6 +128,7 @@ class WsClient {
       this.callback[_id] = _onresult;
       if (_onerror !== undefined) this.callback[_id]['onerror'] = _onerror;
       this.connection.send(JSON.stringify({type: 'query', iface: _interface, method: _method, id: _id, args: _args}));
+      // console.log(JSON.stringify({type: 'query', iface: _interface, method: _method, id: _id, args: _args}));
     } catch (e) {
       this.onError(e);
     }

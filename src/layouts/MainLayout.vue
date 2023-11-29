@@ -1,6 +1,8 @@
 <template>
 
-  <login-component v-if="this.$q.appStore.ready && !this.$q.appStore.user"/>
+  <login-component v-if="this.$q.appStore.ready && !this.$q.appStore.user && !this.$q.appStore.isRegistrationForm"/>
+
+  <registr-component v-if="this.$q.appStore.ready && !this.$q.appStore.user && this.$q.appStore.isRegistrationForm"/>
 
   <q-layout view="lHh Lpr lFf" v-if="this.$q.appStore.ready && this.$q.appStore.user">
 
@@ -40,13 +42,15 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import LoginComponent from 'src/components/LoginComponent.vue'
+import RegistrComponent from 'src/components/RegistrComponent.vue'
 
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    LoginComponent
+    LoginComponent,
+    RegistrComponent
   },
 
   setup () {

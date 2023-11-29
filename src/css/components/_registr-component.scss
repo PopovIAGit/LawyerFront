@@ -1,21 +1,55 @@
-.registr-component{
+.registr-component {
   position:fixed;
   top:0;
   left:0;
-  width:100vw;
-  height:100vh;
-  background:#fff;
+  width:100%;
+  height:100%;
   display:flex;
   align-items:center;
   justify-content:center;
-  background: linear-gradient(#c89c9e, #4f2742);
+  //background: linear-gradient(#dddddd, #a06f6f);
+    background: rgb(215, 230, 235);
 
-  .q-form { width:280px; max-width:100%; }
-  .q-field { width:100%; }
-  .q-btn { width:100%; height:56px; }
   .q-card {
-    background-color: lightblue;
-    width: 400px; height: 540px
+    width: 460px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
+  h4{
+    font-weight: bold;
+    text-align: center;
+    margin: 0,30px, 10px;
+  }
+
+  .q-form {
+    width:400px;
+    max-width:100%;
+  }
+  .q-field {
+    width:100%;
+  }
+  .q-btn {
+    width:100%;
+    height:56px;
+    font-weight: bold;
+    letter-spacing: 3px;
+  }
+
+  .containerForHrefAuth{
+    text-align: right;
+
+    a{
+      color: #1391C7;
+      text-decoration: none;
+    }
+    a:visited {
+      color: #1391C7;
+    }
+  }
+
 
 }
