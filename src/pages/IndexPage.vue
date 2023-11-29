@@ -8,7 +8,7 @@
       <br>
       <div>user: {{ this.$q.appStore.user }}</div> -->
 
-      <q-form @submit="onSubmitForm">
+      <!-- <q-form @submit="onSubmitForm">
         <q-btn
           class="q-btn--lg q-mt-md"
           unelevated
@@ -34,10 +34,10 @@
           type="submit"
           label="delet by id"
         />
-      </q-form>
+      </q-form> -->
 
-      <!-- <ChatComponent/> -->
-      <!-- <RegistrComponent/> -->
+      <ChatComponent/>
+
 
     </div>
   </q-page>
@@ -46,7 +46,6 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import ChatComponent from 'src/components/ChatComponent.vue';
-import RegistrComponent from 'src/components/RegistrComponent.vue';
 
 export default defineComponent({
   name: 'IndexPage',
@@ -60,7 +59,7 @@ export default defineComponent({
 
   components: {
     ChatComponent,
-    RegistrComponent
+
   },
 
 
