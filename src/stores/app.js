@@ -4,7 +4,8 @@ export const useAppStore = defineStore('app', {
   state: () => ({
     ready: false,
     user: null,
-    isRegistrationForm: false
+    isRegistrationForm: false,
+    
   }),
   getters: {
     getIsRegistrationForm() {

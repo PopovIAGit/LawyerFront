@@ -4,7 +4,7 @@
 
   <registr-component v-if="this.$q.appStore.ready && !this.$q.appStore.user && this.$q.appStore.isRegistrationForm"/>
 
-  <q-layout view="lHh Lpr lFf" v-if="this.$q.appStore.ready && this.$q.appStore.user">
+  <q-layout view="hHh  Lpr lFf" v-if="this.$q.appStore.ready && this.$q.appStore.user">
 
     <q-header elevated>
       <q-toolbar>
@@ -27,8 +27,9 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
+      side="left"
     >
-      Drawer
+      <SideBarComponent/>
     </q-drawer>
 
     <q-page-container>
@@ -43,6 +44,7 @@
 import { defineComponent, ref } from 'vue'
 import LoginComponent from 'src/components/LoginComponent.vue'
 import RegistrComponent from 'src/components/RegistrComponent.vue'
+import SideBarComponent from 'src/components/SideBarComponent.vue'
 
 
 export default defineComponent({
@@ -50,7 +52,8 @@ export default defineComponent({
 
   components: {
     LoginComponent,
-    RegistrComponent
+    RegistrComponent,
+    SideBarComponent
   },
 
   setup () {

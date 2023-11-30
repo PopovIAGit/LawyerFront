@@ -1,5 +1,9 @@
 // app global css in SCSS form
 
+@import "page/_indexPage.scss";
+
+
 @import "components/login-component";
 @import "components/registr-component";
 @import "components/chat-component";
+@import "components/sideBar-component.scss"

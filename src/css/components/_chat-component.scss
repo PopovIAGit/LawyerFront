@@ -20,9 +20,12 @@
       flex-direction: column;
       justify-content: space-between;
 
-      .chat-sendMsg {
-        align-self: flex-end;
-      }
+        .chat-window{
+          flex: 1 1 auto;
+        }
+        .chat-sendMsg{
+
+        }
 
   }
 }

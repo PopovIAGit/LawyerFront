@@ -163,8 +163,8 @@ export default defineComponent({
     },
 
     onSubmitRegistrForm() {
-      // console.log(this.name,this.surname, this.patronymic, this.phone, this.email, this.password1, this.isDeleted,this.active,  this.options.indexOf(this.roleId));
-      if (this.password === this.confirmPassword) {
+       // console.log(typeof(this.password), typeof(this.passwordConfirm)    );
+        if (this.password == this.passwordConfirm) {
         this.$q.ws.call(
           "person",
           "add",

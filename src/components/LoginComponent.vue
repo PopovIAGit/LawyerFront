@@ -6,11 +6,12 @@
           <h4>Вход</h4>
           <q-input
             class="q-mb-md"
+            v-model="phoneNumber"
             outlined
             autofocus
             hide-bottom-space
             type="tel"
-            v-model="phoneNumber"
+
             :mask="phoneMask"
             unmasked-value
             :placeholder="formattedPlaceholder"
