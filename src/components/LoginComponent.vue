@@ -144,6 +144,7 @@ export default defineComponent({
           this.$q.appStore.user = response;
           // Добавляем токен в localStorage
           localStorage.setItem("token", response.token);
+          this.$q.appStore.setMenuState(this.$q.appStore.user.roleId);
         },
         // error
         (error) => {

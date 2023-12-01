@@ -6,14 +6,16 @@
 
   .sideBar-user {
     height: 30%; // Процент от высоты sideBar-component
-
+    width: 100%;
+    min-height: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
     .q-avatar{
-      margin: 10px;
+      width: 100%;
+      height: 100%;
     }
 
     .ClientName {
@@ -22,6 +24,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      margin-top: 10px;
 
       .last-name {
         font-size: 20px;
@@ -41,5 +44,6 @@
   .sideBar-menu {
     flex: 1; // Занимает доступное пространство
     background-color: #fff;
+    min-height: fit-content;
   }
 }

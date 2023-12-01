@@ -3,18 +3,18 @@
     <div class="sideBar-user">
       <q-card class="my-card" flat>
         <q-card-section>
-          <q-avatar size="10rem">
+          <q-avatar>
             <img src="https://cdn.quasar.dev/img/avatar1.jpg" />
           </q-avatar>
           <div v-if="this.$q.appStore.user.roleId == 3" class="ClientName">
-            <span class="last-name">{{ this.$q.appStore.user.surname }}</span>
-            <span class="first-name">{{ this.$q.appStore.user.name }}</span>
-            <span class="middle-name">{{
+            <div class="last-name">{{ this.$q.appStore.user.surname }}</div>
+            <div class="first-name">{{ this.$q.appStore.user.name }}</div>
+            <div class="middle-name">{{
               this.$q.appStore.user.patronymic
-            }}</span>
+            }}</div>
           </div>
           <div v-else-if="this.$q.appStore.user.roleId < 3" class="ClientName">
-            <span class="last-name"> {{ getRoleText() }}</span>
+            <div class="last-name"> {{ getRoleText() }}</div>
           </div>
         </q-card-section>
       </q-card>
@@ -22,41 +22,38 @@
     <div class="sideBar-menu">
       <div v-if="this.$q.appStore.user.roleId == 3" class="ClientMenu">
         <q-list bordered separator>
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple @click="setMenuState(1)">
           <q-item-section>Начальная страница</q-item-section>
         </q-item>
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple @click="setMenuState(2)">
           <q-item-section>Тикеты</q-item-section>
         </q-item>
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple @click="setMenuState(3)">
           <q-item-section>Архив</q-item-section>
         </q-item>
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple @click="setMenuState(4)">
           <q-item-section>Настройки</q-item-section>
-        </q-item>
-        <q-item clickable v-ripple>
-          <q-item-section>Настройки профиля</q-item-section>
         </q-item>
       </q-list>
       </div>
       <div v-else-if="this.$q.appStore.user.roleId < 3" class="ClientMenu">
         <q-list bordered separator>
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple  @click="setMenuState(10)">
           <q-item-section>Начальная страница</q-item-section>
         </q-item>
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple  @click="setMenuState(11)">
           <q-item-section>Тикеты</q-item-section>
         </q-item>
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple @click="setMenuState(12)">
           <q-item-section>Клиенты</q-item-section>
         </q-item>
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple  @click="setMenuState(13)">
           <q-item-section>Операторы</q-item-section>
         </q-item>
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple  @click="setMenuState(14)">
           <q-item-section>Администраторы</q-item-section>
         </q-item>
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple  @click="setMenuState(15)">
           <q-item-section>Настройки</q-item-section>
         </q-item>
       </q-list>
@@ -78,6 +75,10 @@ export default defineComponent({
   },
 
   methods: {
+    setMenuState(state){
+      this.$q.appStore.viewMenuState = state;
+    },
+
     getRoleText() {
       const roleId = this.$q.appStore.user.roleId;
       const name = this.$q.appStore.user.name;

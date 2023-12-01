@@ -1,5 +1,46 @@
 <template>
   <q-page >
+    <div class="containerForClient" v-if = "this.$q.appStore.viewMenuState < 10">
+          <div v-if="this.$q.appStore.viewMenuState == 1">
+              <ClientStartVue/>
+          </div>
+          <div v-else-if="this.$q.appStore.viewMenuState == 2">
+            <ClientTicket/>
+          </div>
+          <div v-else-if="this.$q.appStore.viewMenuState == 3">
+            <ClientArchVue/>
+          </div>
+          <div v-else-if="this.$q.appStore.viewMenuState == 4">
+            <Settings/>
+          </div>
+    </div>
+    <diV class="containerForAdmin" v-if = "this.$q.appStore.viewMenuState >=10">
+      <div v-if="this.$q.appStore.viewMenuState == 10">
+          <AdminStartVue/>
+      </div>
+      <div v-else-if="this.$q.appStore.viewMenuState == 11">
+        <AdminTicketVue/>
+      </div>
+      <div v-else-if="this.$q.appStore.viewMenuState == 12">
+        <AdminClientVue/>
+      </div>
+      <div v-else-if="this.$q.appStore.viewMenuState == 13">
+        <AdminOperatorVue/>
+      </div>
+      <div v-else-if="this.$q.appStore.viewMenuState == 14">
+        <AdminAdminVue/>
+      </div>
+      <div v-else-if="this.$q.appStore.viewMenuState == 15">
+        <Settings/>
+      </div >
+
+    </diV>
+
+
+
+
+
+
     <!-- <div class="row-stacked-to-horizontal">
       <div class="row">
 
@@ -14,7 +55,7 @@
       </div>
     </div> -->
 
-    <q-form @submit="onSubmitForm">
+    <!-- <q-form @submit="onSubmitForm">
             <q-btn
               class="q-btn--lg q-mt-md"
               unelevated
@@ -40,13 +81,22 @@
               type="submit"
               label="delet by id"
             />
-          </q-form>
+          </q-form> -->
   </q-page>
 </template>
 
 <script>
 import { defineComponent, ref } from "vue";
 import ChatComponent from "src/components/ChatComponent.vue";
+import AdminStartVue from "src/components/Admin/AdminStart.vue";
+import AdminTicketVue from "src/components/Admin/AdminTicket.vue";
+import AdminOperatorVue from "src/components/Admin/AdminAdmin.vue";
+import AdminClientVue from "src/components/Admin/AdminClient.vue";
+import AdminAdminVue from "src/components/Admin/AdminAdmin.vue";
+import ClientTicket from "src/components/Client/ClientTicket.vue";
+import Settings from "src/components/Settings.vue";
+import ClientStartVue from "src/components/Client/ClientStart.vue";
+import ClientArchVue from "src/components/Client/ClientArch.vue";
 
 export default defineComponent({
   name: "IndexPage",
@@ -59,6 +109,15 @@ export default defineComponent({
 
   components: {
     ChatComponent,
+    AdminStartVue,
+    AdminTicketVue,
+    AdminOperatorVue,
+    AdminClientVue,
+    AdminAdminVue,
+    ClientTicket,
+    ClientStartVue,
+    ClientArchVue,
+    Settings
   },
 
   methods: {
@@ -93,34 +152,34 @@ export default defineComponent({
       //   }
       // )
 
-      this.$q.ws.call(
-        "person",
-        "getList",
-        null,
-        (response) => {
-          console.log("!!!!", response);
-        },
-        (error) => {
-          console.log("error message".error);
-        }
-      );
-
       // this.$q.ws.call(
-      //   'person',
-      //   'update',
-      //   {
-      //     person:{
-      //       id : 8,
-      //       patronymic : 'Андреевич'
-      //     }
-      //   },
+      //   "person",
+      //   "getList",
+      //   null,
       //   (response) => {
-      //     console.log("response message", response);
+      //     console.log("!!!!", response);
       //   },
       //   (error) => {
-      //     console.log(error);
+      //     console.log("error message".error);
       //   }
       // );
+
+      this.$q.ws.call(
+        'person',
+        'update',
+        {
+          person:{
+            id : 1,
+            phone : '70000000000'
+          }
+        },
+        (response) => {
+          console.log("response message", response);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     },
   },
 });
