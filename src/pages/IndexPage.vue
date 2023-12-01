@@ -36,11 +36,6 @@
 
     </diV>
 
-
-
-
-
-
     <!-- <div class="row-stacked-to-horizontal">
       <div class="row">
 
@@ -90,13 +85,14 @@ import { defineComponent, ref } from "vue";
 import ChatComponent from "src/components/ChatComponent.vue";
 import AdminStartVue from "src/components/Admin/AdminStart.vue";
 import AdminTicketVue from "src/components/Admin/AdminTicket.vue";
-import AdminOperatorVue from "src/components/Admin/AdminAdmin.vue";
 import AdminClientVue from "src/components/Admin/AdminClient.vue";
 import AdminAdminVue from "src/components/Admin/AdminAdmin.vue";
 import ClientTicket from "src/components/Client/ClientTicket.vue";
 import Settings from "src/components/Settings.vue";
 import ClientStartVue from "src/components/Client/ClientStart.vue";
 import ClientArchVue from "src/components/Client/ClientArch.vue";
+import AdminOperatorVue from "src/components/Admin/AdminOperator.vue";
+
 
 export default defineComponent({
   name: "IndexPage",

@@ -6,6 +6,8 @@ export const useAppStore = defineStore('app', {
     user: null,
     isRegistrationForm: false,
     viewMenuState: null,
+    userList: [],
+    ticketList: []
 
   }),
   getters: {
@@ -37,7 +39,7 @@ export const useAppStore = defineStore('app', {
         case 2:  this.viewMenuState = 10;  break;
         case 3:  this.viewMenuState = 1;  break;
       }
-      console.log("текущее меню", this.viewMenuState);
-    }
+    },
+
   },
 });

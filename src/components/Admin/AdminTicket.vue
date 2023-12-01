@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="AdminTicketPage">
     AdminTicketPage
   </div>
 </template>

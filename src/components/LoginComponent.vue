@@ -144,7 +144,35 @@ export default defineComponent({
           this.$q.appStore.user = response;
           // Добавляем токен в localStorage
           localStorage.setItem("token", response.token);
+          //выбераем начальное состояние бокового меню в зависимости от роли
           this.$q.appStore.setMenuState(this.$q.appStore.user.roleId);
+
+          if(this.$q.appStore.user.roleId < 2){
+            this.$q.ws.call(
+              "person",
+              "getList",
+              null,
+              (response) => {
+                this.$q.appStore.userList = response;
+                console.log("1", this.$q.appStore.userList);
+              },
+              (error) => {
+                console.log("error message",error);
+              }
+            );
+          }
+              this.$q.ws.call(
+                  "service",
+                  "getGroupList",
+                  null,
+                  (response) => {
+                    this.$q.appStore.ticketList = response;
+                    console.log("2", this.$q.appStore.ticketList);
+                  },
+                  (error) => {
+                    console.log("error message",error);
+                  }
+                );
         },
         // error
         (error) => {
