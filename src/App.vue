@@ -21,7 +21,8 @@ export default defineComponent({
     /** WS **/
     this.$q.ws = new WsClient;
     try {
-      await this.$q.ws.connect('ws://83.136.232.237:3031');
+      // await this.$q.ws.connect('wss://83.136.232.237:3031');
+      await this.$q.ws.connect('wss://sinthy.fvds.ru:3031');
     }
     catch (e) {
       console.log(e);

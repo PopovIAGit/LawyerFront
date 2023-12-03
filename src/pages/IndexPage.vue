@@ -1,36 +1,36 @@
 <template>
-  <q-page >
+  <q-page class="indexPage">
     <div class="containerForClient" v-if = "this.$q.appStore.viewMenuState < 10">
-          <div v-if="this.$q.appStore.viewMenuState == 1">
+          <div class="client" v-if="this.$q.appStore.viewMenuState == 1">
               <ClientStartVue/>
           </div>
-          <div v-else-if="this.$q.appStore.viewMenuState == 2">
+          <div class="client" v-else-if="this.$q.appStore.viewMenuState == 2">
             <ClientTicket/>
           </div>
-          <div v-else-if="this.$q.appStore.viewMenuState == 3">
+          <div class="client" v-else-if="this.$q.appStore.viewMenuState == 3">
             <ClientArchVue/>
           </div>
-          <div v-else-if="this.$q.appStore.viewMenuState == 4">
+          <div class="client" v-else-if="this.$q.appStore.viewMenuState == 4">
             <Settings/>
           </div>
     </div>
     <diV class="containerForAdmin" v-if = "this.$q.appStore.viewMenuState >=10">
-      <div v-if="this.$q.appStore.viewMenuState == 10">
+      <div class="admin" v-if="this.$q.appStore.viewMenuState == 10">
           <AdminStartVue/>
       </div>
-      <div v-else-if="this.$q.appStore.viewMenuState == 11">
+      <div class="admin" v-else-if="this.$q.appStore.viewMenuState == 11">
         <AdminTicketVue/>
       </div>
-      <div v-else-if="this.$q.appStore.viewMenuState == 12">
+      <div class="admin" v-else-if="this.$q.appStore.viewMenuState == 12">
         <AdminClientVue/>
       </div>
-      <div v-else-if="this.$q.appStore.viewMenuState == 13">
+      <div class="admin" v-else-if="this.$q.appStore.viewMenuState == 13">
         <AdminOperatorVue/>
       </div>
-      <div v-else-if="this.$q.appStore.viewMenuState == 14">
+      <div class="admin" v-else-if="this.$q.appStore.viewMenuState == 14">
         <AdminAdminVue/>
       </div>
-      <div v-else-if="this.$q.appStore.viewMenuState == 15">
+      <div class="admin" v-else-if="this.$q.appStore.viewMenuState == 15">
         <Settings/>
       </div >
 

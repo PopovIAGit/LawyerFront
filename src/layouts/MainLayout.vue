@@ -19,6 +19,7 @@
         <q-toolbar-title>
           LawyerChat
         </q-toolbar-title>
+        
         <q-btn rounded flat icon-right="logout" no-caps label="Выйти" :ripple="false" @click="onClickLogout"/>
       </q-toolbar>
     </q-header>

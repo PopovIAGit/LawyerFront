@@ -1,15 +1,23 @@
-.row-stacked-to-horizontal {
+.indexPage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
-  // .row{
-  //   background-color: $accent;
-  //   height: 100%;
-  // }
-  // .row > div {
-  //   padding: 10px 15px;
-  //   background: rgba(#999,.15);
-  //   border: 1px solid rgba(#999,.2);
-  // }
-  // .row + .row {
-  //   margin-top: 1rem;
-  // }
+  .containerForClient{
+
+    flex: 1;
+    display: flex;
+    .client{
+      flex: 1;
+    }
+  }
+  .containerForAdmin{
+
+    flex: 1;
+    display: flex;
+    .admin{
+      flex: 1;
+    }
+  }
 }
