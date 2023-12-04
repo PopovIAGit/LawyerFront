@@ -10,6 +10,10 @@
         row-key="name"
         color="primary"
       >
+        <template #body-cell-status="props">
+          <q-td :class="getStatusColor(props.row.status)">{{ props.value }} </q-td>
+        </template>
+
         <template v-slot:top>
           <div class="container">
             <div>
@@ -37,7 +41,6 @@
               <q-space />
               <q-btn
                 color="primary"
-
                 :disable="loading"
                 label="Добавить оператора"
                 @click="addClient"
@@ -90,7 +93,7 @@ const rows = [
     phone: "+7(000) 000 0000",
     email: "my@mail.com",
     addres: "some addres",
-    status: "activ",
+    status: "active",
     tickets: 12,
   },
   {
@@ -98,7 +101,7 @@ const rows = [
     phone: "+7(000) 000 0000",
     email: "my@mail.com",
     addres: "some addres",
-    status: "activ",
+    status: "unactive",
     tickets: 12,
   },
   {
@@ -106,7 +109,7 @@ const rows = [
     phone: "+7(000) 000 0000",
     email: "my@mail.com",
     addres: "some addres",
-    status: "activ",
+    status: "unactive",
     tickets: 12,
   },
   {
@@ -114,7 +117,7 @@ const rows = [
     phone: "+7(000) 000 0000",
     email: "my@mail.com",
     addres: "some addres",
-    status: "activ",
+    status: "active",
     tickets: 12,
   },
   {
@@ -122,7 +125,7 @@ const rows = [
     phone: "+7(000) 000 0000",
     email: "my@mail.com",
     addres: "some addres",
-    status: "activ",
+    status: "active",
     tickets: 12,
   },
   {
@@ -130,7 +133,7 @@ const rows = [
     phone: "+7(000) 000 0000",
     email: "my@mail.com",
     addres: "some addres",
-    status: "activ",
+    status: "active",
     tickets: 12,
   },
   {
@@ -138,7 +141,7 @@ const rows = [
     phone: "+7(000) 000 0000",
     email: "my@mail.com",
     addres: "some addres",
-    status: "activ",
+    status: "active",
     tickets: 12,
   },
   {
@@ -146,7 +149,7 @@ const rows = [
     phone: "+7(000) 000 0000",
     email: "my@mail.com",
     addres: "some addres",
-    status: "activ",
+    status: "active",
     tickets: 12,
   },
 ];
@@ -168,8 +171,8 @@ export default defineComponent({
     statusOptions() {
       // Возможные значения статуса для q-select
       return [
-        { label: "активные", value: "activ" },
-        { label: "не активные", value: "unactiv" },
+        { label: "активные", value: "active" },
+        { label: "не активные", value: "unactive" },
       ];
     },
   },
@@ -178,55 +181,70 @@ export default defineComponent({
     addClient() {
       // Логика добавления новой строки
     },
+    getStatusColor(status) {
+      return status === "active" ? "activ-cell" : "unactiv-cell";
+    },
   },
 });
 </script>
 
 <style lang="scss">
 .AdminOperatorPage {
-  background-color: #d0d0d6;
+  background-color: rgb(215, 230, 235);
   width: 100%;
   height: 100%;
   flex: 1;
   display: flex;
   flex-direction: column;
 
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 
-        .container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Выравнивание по краям */
 
-        .row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between; /* Выравнивание по краям */
-
-          .q-input,
-          .q-select {
-            order: -1; /* Перемещаем в начало элементов */
-            border-radius: 8px;
-            border: 1px solid #D9D9D9;
-            margin-right: 20px;
-            min-width: 200px;
-        }
-          }
+      .q-input,
+      .q-select {
+        order: -1; /* Перемещаем в начало элементов */
+        border-radius: 8px;
+        border: 1px solid #d9d9d9;
+        margin-right: 20px;
+        min-width: 200px;
+      }
+    }
 
     .q-btn {
       order: 10; /* Перемещаем в конец элементов */
     }
   }
 
-
-
+  .q-badge {
+    align-items: center;
+    justify-content: center;
+    inline-size: auto;
+  }
   h4 {
     text-align: left;
     /* сверху | справа | снизу | слева */
-    margin: 10px 0 10px auto;
+    margin: 20px 0 20px auto;
     font-weight: 700;
     font-size: 36px;
     line-height: normal;
   }
 
+
+      .activ-cell {
+        // background-color: #DCEDC8;
+        color: #2BCD28;
+      }
+
+      .unactiv-cell {
+        // background-color:#FFCDD3;
+        color: red;
+      }
 }
 </style>
