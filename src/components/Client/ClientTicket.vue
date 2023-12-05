@@ -10,6 +10,6 @@ export default defineComponent({
   name: "ClientTicketPages",
 })
 </script>
-<style lang="">
+<style lang="scss">
 
 </style>

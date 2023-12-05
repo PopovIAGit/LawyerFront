@@ -48,7 +48,8 @@
   }
 
   .active {
-    background-color: rgb(215, 230, 235);
+   // background-color: rgb(232, 235, 215);
+   border-inline-start: solid 5px $primary;
     font-weight: bold;
     /* Добавьте свои стили */
   }
