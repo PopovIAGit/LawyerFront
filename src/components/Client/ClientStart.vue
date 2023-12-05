@@ -2,8 +2,8 @@
   <div class="ClientStartPage">
     <div class="ClientContainer">
       <q-card class="my-card">
-        <q-card-section class="q-pa-sm">
-          <div class="text-h6">Операторы онлайн</div>
+        <q-card-section class="q-pa-md">
+          <div class="text-h4 text-weight-bold">Операторы онлайн</div>
         </q-card-section>
         <q-card-section horizontal>
           <q-card-section avatar>
@@ -36,11 +36,38 @@
         </q-card-section>
         <q-separator dark />
 
-        <q-card-actions>
-          <q-btn class="text-weight-bold" color="primary">Новый тикет </q-btn>
+        <q-card-actions class="q-pa-md">
+          <q-btn class="text-weight-bold " color="primary"  @click="prompt = true">Новый тикет </q-btn>
         </q-card-actions>
       </q-card>
     </div>
+
+      <!-- / -->
+      <q-dialog v-model="prompt" persistent >
+      <q-card  style="width: 700px; max-width: 80vw;">
+        <q-card-section>
+          <div class="text-h6 text-weight-bold ">Новый тикет</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none" >
+          <q-select outlined v-model="model" :options="options" label="Выберите тему обращения" class="q-mb-sm"/>
+
+          <q-editor
+            v-model="editor"
+            class="q-mt-sm"
+            :definitions="{
+              bold: {label: 'Bold', icon: null, tip: 'My bold tooltip'}
+      }"
+    />
+        </q-card-section>
+
+        <q-card-actions align="right" class="text-primary">
+          <q-btn label="Отмена" v-close-popup color="primary"/>
+          <q-btn label="Создать тикет" v-close-popup color="primary"/>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
   </div>
 </template>
 <script>
@@ -48,6 +75,18 @@ import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "ClientStartPage",
+
+  setup () {
+    return {
+      prompt: ref(false),
+      model: ref(null),
+      editor: ref(''),
+      options: [
+        'тема 1', 'тема 2', 'тема 3', 'тема 4', 'тема 5'
+      ]
+
+    }
+  }
 });
 </script>
 <style lang="scss">
