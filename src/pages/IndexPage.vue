@@ -13,6 +13,9 @@
           <div class="client" v-else-if="this.$q.appStore.viewMenuState == 4">
             <Settings/>
           </div>
+          <div class="client" v-else-if="this.$q.appStore.viewMenuState == 5">
+            <ClientTicketOpen/>
+          </div>
     </div>
     <diV class="containerForAdmin" v-if = "this.$q.appStore.viewMenuState >=10">
       <div class="admin" v-if="this.$q.appStore.viewMenuState == 10">
@@ -92,6 +95,7 @@ import Settings from "src/components/Settings.vue";
 import ClientStartVue from "src/components/Client/ClientStart.vue";
 import ClientArchVue from "src/components/Client/ClientArch.vue";
 import AdminOperatorVue from "src/components/Admin/AdminOperator.vue";
+import ClientTicketOpen from "src/components/Client/ClientTicketOpen.vue";
 
 
 export default defineComponent({
@@ -113,6 +117,7 @@ export default defineComponent({
     ClientTicket,
     ClientStartVue,
     ClientArchVue,
+    ClientTicketOpen,
     Settings
   },
 

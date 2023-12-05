@@ -25,7 +25,7 @@
           <q-item clickable v-ripple @click="setMenuState(1)" :class="{'active': getMenuState() === 1}">
             <q-item-section>Начальная страница</q-item-section>
           </q-item>
-          <q-item clickable v-ripple @click="setMenuState(2)" :class="{'active': getMenuState() === 2}">
+          <q-item clickable v-ripple @click="setMenuState(2)" :class="{'active': getMenuState() === 2 || getMenuState() === 5}">
             <q-item-section>Тикеты</q-item-section>
           </q-item>
           <q-item clickable v-ripple @click="setMenuState(3)" :class="{'active': getMenuState() === 3}">
