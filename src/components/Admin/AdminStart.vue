@@ -7,12 +7,10 @@
             <div class="operatorTitle">
               <div class="operatorOnline">
                 <q-card class="my-card" bordered>
-                  <q-card-section class="my-card" bordered>
+                  <q-card-section bordered>
                     <q-item-section>
                       <q-card-section horizontal>
-                        <q-item-label class="text-weight-bold text-h6"
-                          >Операторы</q-item-label
-                        >
+                        <q-item-label class="text-weight-bold text-h6">Операторы</q-item-label>
                         <div class="online">
                           <q-item-label caption> Онлайн:3 </q-item-label>
                         </div>
@@ -21,7 +19,7 @@
                   </q-card-section>
                   <q-card-section horizontal>
                     <q-card-section avatar>
-                      <q-avatar>
+                      <q-avatar >
                         <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
                         <q-badge floating rounded color="green"></q-badge>
                       </q-avatar>
@@ -39,17 +37,17 @@
                       </q-avatar>
                     </q-card-section>
                     <q-card-section avatar>
-                      <q-avatar>
+                      <q-avatar class="custom-avatar">
                         <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
                       </q-avatar>
                     </q-card-section>
                     <q-card-section avatar>
-                      <q-avatar>
+                      <q-avatar class="custom-avatar">
                         <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
                       </q-avatar>
                     </q-card-section>
                     <q-card-section avatar>
-                      <q-avatar color="grey-5">
+                      <q-avatar class="custom-avatar">
                         <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
                       </q-avatar>
                     </q-card-section>
@@ -61,10 +59,11 @@
           <div class="ticketContainer">
             <div class="ticketNumber">
               <q-card class="my-card" bordered>
-                <q-card-section class="my-card q-pa-sm" bordered>
+                <q-card-section class="q-pa-sm" bordered>
                   <q-item-section>
                     <q-card-section horizontal>
-                      <q-item-label class="text-weight-bold text-h6">Тикеты</q-item-label>
+                      <q-item-label class="text-weight-bold text-h6">Тикеты</q-item-label
+                      >
                       <div class="online">
                         <q-item-label caption> Всего:153 </q-item-label>
                       </div>
@@ -72,33 +71,33 @@
                   </q-item-section>
                 </q-card-section>
                 <q-card-section horizontal>
-                  <q-card bordered  class="my-card">
+                  <q-card bordered>
                     <q-card-section class="q-pa-sm">
-                      <div class="text-h4 text-center">8</div>
+                      <div class="text-h4 text-center text-weight-bold text-green">8</div>
                     </q-card-section>
                     <q-separator dark inset />
-                    <q-card-section class="q-pa-sm"> открытых </q-card-section>
+                    <q-card-section class="q-pa-sm text-green text-weight-bold"> открытых </q-card-section>
                   </q-card>
-                  <q-card bordered class="my-card">
+                  <q-card bordered>
                     <q-card-section class="q-pa-sm">
-                      <div class="text-h4 text-center" color="primary">7</div>
+                      <div class="text-h4 text-center text-weight-bold text-grey" color="primary">7</div>
                     </q-card-section>
                     <q-separator dark inset />
-                    <q-card-section class="q-pa-sm"> завершенных </q-card-section>
+                    <q-card-section class="q-pa-sm text-grey text-weight-bold">завершенных</q-card-section>
                   </q-card>
-                  <q-card bordered class="my-card">
+                  <q-card bordered>
                     <q-card-section class="q-pa-sm">
-                      <div class="text-h4 text-center">7</div>
+                      <div class="text-h4 text-center text-weight-bold text-red">7</div>
                     </q-card-section>
                     <q-separator dark inset />
-                    <q-card-section class="q-pa-sm"> отложенных </q-card-section>
+                    <q-card-section class="q-pa-sm text-red text-weight-bold">отложенных</q-card-section>
                   </q-card>
-                  <q-card bordered class="my-card">
+                  <q-card bordered>
                     <q-card-section class="q-pa-sm">
-                      <div class="text-h4 text-center">7</div>
+                      <div class="text-h4 text-center text-weight-bold text-blue">15</div>
                     </q-card-section>
                     <q-separator dark inset />
-                    <q-card-section class="q-pa-sm"> ожидающих </q-card-section>
+                    <q-card-section class="q-pa-sm text-blue text-weight-bold"> ожидающих </q-card-section>
                   </q-card>
                 </q-card-section>
               </q-card>
@@ -164,7 +163,7 @@ const columns = [
     sortable: true,
   },
   { name: "status", label: "Статус", align: "left", field: "status" },
-  { name: "step", label: "этап", align: "left", field: "step" },
+  { name: "step", label: "Этап", align: "left", field: "step" },
   { name: "operator", label: "Оператор", align: "left", field: "operator" },
   { name: "msg", label: "Сообщений", align: "left", field: "msg" },
 ];
@@ -269,19 +268,27 @@ export default defineComponent({
     .row {
       display: flex;
       align-items: center;
-      justify-content: space-between; /* Выравнивание по краям */
+      justify-content: space-between;   /* Выравнивание по краям */
 
       .operatorContainer {
         display: flex;
         flex-direction: row;
-        order: -1; /* Перемещаем в начало элементов */
+        order: -1;     /* Перемещаем в начало элементов */
+        .operatorOnline {
+          max-height: 140px;
+        }
       }
-    }
 
-    .ticketContainer {
-      order: 10; /* Перемещаем в конец элементов */
+      .ticketContainer {
+      order: 10;
+      /* Перемещаем в конец элементов */
       display: flex;
       flex-direction: row;
+
+      .ticketNumber {
+        max-height: 140px;
+      }
+    }
     }
   }
 
@@ -308,6 +315,7 @@ export default defineComponent({
     margin: 0;
     display: flex;
     flex-direction: row;
+
     .q-item-label {
       margin: 0;
     }
@@ -318,5 +326,26 @@ export default defineComponent({
     min-width: auto;
     margin-bottom: 10px;
   }
+
+        .custom-avatar {
+        position: relative;
+      }
+
+      .custom-avatar::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4); /* Adjust the transparency and color of the mask as desired */
+        z-index: 10;
+      }
+
+      .custom-avatar img {
+        position: relative;
+        z-index: 1;
+      }
 }
 </style>

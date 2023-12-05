@@ -14,6 +14,7 @@ export const useAppStore = defineStore('app', {
     getIsRegistrationForm() {
       return this.isRegistrationForm;
     },
+
   },
   actions: {
     set (data) {
