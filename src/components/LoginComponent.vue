@@ -63,14 +63,14 @@
                 </a>
               </span>
 
-              <span>
+              <!-- <span>
                 <a
                   href="#"
                   class = "containerForHrefRegRight"
                   @click="toggleToRegistration"
                   >Регистрация
                 </a>
-              </span>
+              </span> -->
             </div>
       </q-card-actions>
     </q-card>
@@ -89,6 +89,8 @@ export default defineComponent({
     return {
       phoneNumber: ref("79234046955"), //TODO обнулить
       password: ref("771665"), //TODO обнулить
+      // phoneNumber: ref(""), //TODO вернуть
+      // password: ref(""), //TODO вернуть
       phoneMask: "+# (###) ### - ####",
       isPwd: ref(true),
     };
@@ -102,7 +104,18 @@ export default defineComponent({
 
   methods: {
     forgotPassword(){
-      console.log("заглушка");
+      this.$q.dialogStore.set({
+            show: true,
+            title: "Забыли пароль?",
+            text: "Вам позвонят!",
+            ok:{
+              label:"Выйти",
+              fn: () =>{
+                /*что то делать*/
+                this.$q.dialogStore.show = false;
+              }
+            },
+          })
     },
 
     formatPhoneNumber() {
@@ -147,36 +160,49 @@ export default defineComponent({
           //выбераем начальное состояние бокового меню в зависимости от роли
           this.$q.appStore.setMenuState(this.$q.appStore.user.roleId);
 
-          if(this.$q.appStore.user.roleId < 2){
-            this.$q.ws.call(
-              "person",
-              "getList",
-              null,
-              (response) => {
-                this.$q.appStore.userList = response;
-                console.log("1", this.$q.appStore.userList);
-              },
-              (error) => {
-                console.log("error message",error);
-              }
-            );
-          }
-              this.$q.ws.call(
-                  "service",
-                  "getGroupList",
-                  null,
-                  (response) => {
-                    this.$q.appStore.ticketList = response;
-                    console.log("2", this.$q.appStore.ticketList);
-                  },
-                  (error) => {
-                    console.log("error message",error);
-                  }
-                );
+          // if(this.$q.appStore.user.roleId < 2){
+          //   this.$q.ws.call(
+          //     "person",
+          //     "getList",
+          //     null,
+          //     (response) => {
+          //       this.$q.appStore.userList = response;
+          //       console.log("1", this.$q.appStore.userList);
+          //     },
+          //     (error) => {
+          //       console.log("Делаем что то пр не входе",error);
+          //     }
+          //   );
+          // }
+          //     this.$q.ws.call(
+          //         "service",
+          //         "getGroupList",
+          //         null,
+          //         (response) => {
+          //           this.$q.appStore.ticketList = response;
+          //           console.log("2", this.$q.appStore.ticketList);
+          //         },
+          //         (error) => {
+          //           console.log("Делаем что то пр не входе",error);
+          //         }
+          //       );
         },
         // error
         (error) => {
-          console.log(error);
+          console.log("что то делаем",error);
+          this.$q.dialogStore.set({
+            show: true,
+            title: "Ошибка",
+            text: "Ошибка авторизации",
+            ok:{
+              label:"Ок",
+              fn: () =>{
+                this.phoneNumber = "";
+                this.password = "";
+                this.$q.dialogStore.show = false;
+              }
+            },
+          })
         }
       );
     },

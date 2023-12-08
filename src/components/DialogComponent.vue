@@ -1,6 +1,6 @@
 <template>
   <q-dialog class="q-dialog--component" v-model="this.$q.dialogStore.show" @before-hide="this.$q.dialogStore.hide()">
-    <q-card>
+    <q-card class="q-dialog__content">
       <q-card-section class="q-dialog__header">
         <div class="q-dialog__header-content">
           <div class="text-h6">{{this.$q.dialogStore.title}}</div>
