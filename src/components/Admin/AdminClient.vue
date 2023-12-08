@@ -43,7 +43,7 @@
                 color="primary"
                 :disable="loading"
                 label="Добавить клиента"
-                @click="addClient"
+                @click="addClient = true"
               />
             </div>
           </div>
@@ -53,10 +53,21 @@
           </template> -->
       </q-table>
     </div>
+
+    <q-dialog v-model="addClient" persistent ref="myDialog">
+      <q-card>
+        <q-card-section class="row items-center">
+          <registr-component :person="personData" @onFormSubmit="handleFormSubmit"/>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+
   </div>
 </template>
 <script>
 import { defineComponent, ref } from "vue";
+import RegistrComponent from "../RegistrComponent.vue";
+
 
 const columns = [
   {
@@ -156,14 +167,17 @@ const rows = [
 
 export default defineComponent({
   name: "AdminClientPage",
-
+  components: {
+    RegistrComponent,
+  },
   setup() {
     return {
       columns,
       rows,
-
+      addClient: ref(false),
       filterName: ref(""),
       filterStatus: ref("активные"),
+      personData: ref(null), // данные для отправки в форму
     };
   },
 
@@ -178,12 +192,34 @@ export default defineComponent({
   },
 
   methods: {
-    addClient() {
-      // Логика добавления новой строки
-    },
+
     getStatusColor(status) {
       return status === "active" ? "activ-cell" : "unactiv-cell";
     },
+    handleFormSubmit(formData) {
+          // this.$q.ws.call(
+          //   "person",
+          //   "add",
+          //   {
+          //     person: {
+          //       name: formData.name,
+          //       surname: formData.surname,
+          //       patronymic: formData.npatronymicme,
+          //       phone: formData.phone,
+          //       email: formData.email,
+          //       password: formData.password,
+          //       roleId: 3,
+          //     },
+          //   },
+          //   (response) => {
+          //     console.log("response message", response);
+          //   },
+          //   (error) => {
+          //     console.log(error);
+          //   }
+          // );
+      console.log(formData);
+    }
   },
 });
 </script>

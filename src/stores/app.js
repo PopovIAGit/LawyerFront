@@ -4,16 +4,12 @@ export const useAppStore = defineStore('app', {
   state: () => ({
     ready: false,
     user: null,
-    isRegistrationForm: false,
     viewMenuState: null,
     userList: [],
     ticketList: []
 
   }),
   getters: {
-    getIsRegistrationForm() {
-      return this.isRegistrationForm;
-    },
 
   },
   actions: {
@@ -21,11 +17,6 @@ export const useAppStore = defineStore('app', {
       Object.entries(data).forEach(([key, value]) => {
         this[key] = value;
       });
-    },
-
-    // переход из регистрации в логин и обратно
-    toggleRegistrationForm() {
-      this.isRegistrationForm = !this.isRegistrationForm;
     },
 
     /*

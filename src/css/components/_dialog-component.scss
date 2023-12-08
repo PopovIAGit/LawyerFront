@@ -1,0 +1,54 @@
+.q-dialog--component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+}
+
+.q-dialog__content {
+  max-width: 400px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+.q-dialog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.q-dialog__header-content {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.q-dialog__body {
+  padding: 16px;
+  flex-grow: 1;
+}
+
+.q-dialog__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+.q-dialog__footer > * + * {
+  margin-left: 8px;
+}
+
+.q-dialog__close-icon {
+  margin-right: 8px;
+}

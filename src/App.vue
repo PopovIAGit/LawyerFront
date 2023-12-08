@@ -1,22 +1,25 @@
 
 <template>
   <router-view />
+  <DialogComponent />
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 import { useAppStore } from 'stores/app'
+import {useDialogAlertStore} from 'stores/dialogAlert'
 import WsClient from 'src/utils/WsClient'
+import DialogComponent from './components/DialogComponent.vue'
 
 export default defineComponent({
   name: 'App',
-
 
   // async для того, чтобы this.$q.ws.connect выполнилась асинхронно, дождаться соединения или ошибки соединения
   async beforeMount () {
 
     /** STORES **/
     this.$q.appStore = useAppStore();
+    this.$q.dialogStore = useDialogAlertStore();
 
     /** WS **/
     this.$q.ws = new WsClient;
@@ -75,6 +78,11 @@ export default defineComponent({
     else {
       this.$q.appStore.ready = true;
     }
+  },
+
+  components:{
+    DialogComponent,
   }
+
 })
 </script>

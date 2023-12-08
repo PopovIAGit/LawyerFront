@@ -1,8 +1,7 @@
 <template>
 
-  <login-component v-if="this.$q.appStore.ready && !this.$q.appStore.user && !this.$q.appStore.isRegistrationForm"/>
+  <login-component v-if="this.$q.appStore.ready && !this.$q.appStore.user"/>
 
-  <registr-component v-if="this.$q.appStore.ready && !this.$q.appStore.user && this.$q.appStore.isRegistrationForm"/>
 
   <q-layout view="hHh  Lpr lFf" v-if="this.$q.appStore.ready && this.$q.appStore.user">
 
@@ -19,7 +18,8 @@
         <q-toolbar-title>
           LawyerChat
         </q-toolbar-title>
-        
+        <q-chip v-if ="this.$q.appStore.user.roleId < 3" icon="chat" color="primary" text-color="white">Новых сообщений в чате: 10</q-chip>
+        <q-chip v-if ="this.$q.appStore.user.roleId < 3" icon="notifications" color="primary" text-color="white">Новых уведомлений: 5</q-chip>
         <q-btn rounded flat icon-right="logout" no-caps label="Выйти" :ripple="false" @click="onClickLogout"/>
       </q-toolbar>
     </q-header>
@@ -44,7 +44,6 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import LoginComponent from 'src/components/LoginComponent.vue'
-import RegistrComponent from 'src/components/RegistrComponent.vue'
 import SideBarComponent from 'src/components/SideBarComponent.vue'
 
 
@@ -53,7 +52,6 @@ export default defineComponent({
 
   components: {
     LoginComponent,
-    RegistrComponent,
     SideBarComponent
   },
 
@@ -70,21 +68,24 @@ export default defineComponent({
 
   methods: {
     onClickLogout () {
-      this.$q.ws.call(
-        'person',
-        'logout',
-        null,
-        // success
-        (response) => {
-          this.logout();
-        },
-        // error
-        (error) => {
-          this.logout();
-        }
-      );
-      localStorage.removeItem('token');
-      this.$q.appStore.user = null;
+          this.$q.dialogStore.set({
+            show: true,
+            title: "Выйти из системы?",
+            text: "Подтвердите выход из системы",
+            ok:{
+              label:"Выйти",
+              fn: () =>{
+                localStorage.removeItem('token');
+                this.$q.appStore.user = null;
+                this.$q.dialogStore.show = false;
+              }
+            },
+            cancel:{}
+          })
+
+
+
+
     }
   }
 })
