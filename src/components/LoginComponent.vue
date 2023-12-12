@@ -157,8 +157,7 @@ export default defineComponent({
           this.$q.appStore.user = response;
           // Добавляем токен в localStorage
           localStorage.setItem("token", response.token);
-          //выбераем начальное состояние бокового меню в зависимости от роли
-          this.$q.appStore.setMenuState(this.$q.appStore.user.roleId);
+         
 
           // if(this.$q.appStore.user.roleId < 2){
           //   this.$q.ws.call(

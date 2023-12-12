@@ -279,41 +279,6 @@
       </div>
       <registr-component />
     </diV>
-
-    <!-- <div class="admin" v-if="this.$q.appStore.viewMenuState == 10">
-          <AdminStartVue/>
-      </div>
-      <div class="admin" v-else-if="this.$q.appStore.viewMenuState == 11">
-        <AdminTicketVue/>
-      </div>
-      <div class="admin" v-else-if="this.$q.appStore.viewMenuState == 12">
-        <AdminClientVue/>
-      </div>
-      <div class="admin" v-else-if="this.$q.appStore.viewMenuState == 13">
-        <AdminOperatorVue/>
-      </div>
-      <div class="admin" v-else-if="this.$q.appStore.viewMenuState == 14">
-        <AdminAdminVue/>
-      </div>
-      <div class="admin" v-else-if="this.$q.appStore.viewMenuState == 15">
-        <Settings/>
-      </div > -->
-
-    <!-- <div class="client" v-if="this.$q.appStore.viewMenuState == 1">
-              <ClientStartVue/>
-          </div>
-          <div class="client" v-else-if="this.$q.appStore.viewMenuState == 2">
-            <ClientTicket/>
-          </div>
-          <div class="client" v-else-if="this.$q.appStore.viewMenuState == 3">
-            <ClientArchVue/>
-          </div>
-          <div class="client" v-else-if="this.$q.appStore.viewMenuState == 4">
-            <Settings/>
-          </div>
-          <div class="client" v-else-if="this.$q.appStore.viewMenuState == 5">
-            <ClientTicketOpen/>
-          </div> -->
   </q-page>
 </template>
 
@@ -402,8 +367,8 @@ const rows = [
 ];
 
 export default defineComponent({
-  name: "IndexPage",
 
+  name: "IndexPage",
   setup() {
     return {
       id: ref(""),

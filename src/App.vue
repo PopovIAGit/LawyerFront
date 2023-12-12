@@ -68,7 +68,6 @@ export default defineComponent({
           localStorage.setItem('token', response.token);
           // Указываем в хранилище, что приложение готово, всё нужное сделано
           this.$q.appStore.ready = true;
-          this.$q.appStore.setMenuState(this.$q.appStore.user.roleId);
 
         },
         // error
@@ -82,7 +81,7 @@ export default defineComponent({
     else {
       this.$q.appStore.ready = true;
     }
-    
+
   },
 
   components:{
