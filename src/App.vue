@@ -8,6 +8,9 @@
 import { defineComponent } from 'vue'
 import { useAppStore } from 'stores/app'
 import {useDialogAlertStore} from 'stores/dialogAlert'
+import {useDialogRegStore} from 'stores/dialogReg'
+
+
 import WsClient from 'src/utils/WsClient'
 import DialogComponent from './components/DialogComponent.vue'
 
@@ -20,6 +23,7 @@ export default defineComponent({
     /** STORES **/
     this.$q.appStore = useAppStore();
     this.$q.dialogStore = useDialogAlertStore();
+    this.$q.regStore = useDialogRegStore();
 
     /** WS **/
     this.$q.ws = new WsClient;

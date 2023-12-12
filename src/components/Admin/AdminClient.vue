@@ -43,7 +43,7 @@
                 color="primary"
                 :disable="loading"
                 label="Добавить клиента"
-                @click="addClient = true"
+                @click="onClickAddClient"
               />
             </div>
           </div>
@@ -54,19 +54,11 @@
       </q-table>
     </div>
 
-    <q-dialog v-model="addClient" persistent ref="myDialog">
-      <q-card>
-        <q-card-section class="row items-center">
-          <registr-component :person="personData" @onFormSubmit="handleFormSubmit"/>
-        </q-card-section>
-      </q-card>
-    </q-dialog>
-
   </div>
 </template>
 <script>
 import { defineComponent, ref } from "vue";
-import RegistrComponent from "../RegistrComponent.vue";
+
 
 
 const columns = [
@@ -168,7 +160,7 @@ const rows = [
 export default defineComponent({
   name: "AdminClientPage",
   components: {
-    RegistrComponent,
+
   },
   setup() {
     return {
@@ -193,33 +185,45 @@ export default defineComponent({
 
   methods: {
 
+    onClickAddClient() {
+          this.$q.regStore.set({
+            show: true,
+            title: "Добавить клиента",
+            ok:{
+              label:"Добавить",
+              fn: () =>{
+                      console.log("some data",this.$q.regStore.data),
+                      this.$q.ws.call(
+                        "person",
+                        "add",
+                        {
+                          person: {
+                            name: this.$q.regStore.data.name,
+                            surname: this.$q.regStore.data.surname,
+                            patronymic: this.$q.regStore.data.npatronymicme,
+                            phone: this.$q.regStore.data.phone,
+                            email: this.$q.regStore.data.email,
+                            password: this.$q.regStore.data.password,
+                            roleId: 3,
+                          },
+                        },
+                        (response) => {
+                          console.log("response message", response);
+                        },
+                        (error) => {
+                          console.log(error);
+                        }
+                      );
+                      this.$q.regStore.show = false;
+                    }
+                  },
+                  cancel:{ }
+                })
+    },
+
     getStatusColor(status) {
       return status === "active" ? "activ-cell" : "unactiv-cell";
     },
-    handleFormSubmit(formData) {
-          // this.$q.ws.call(
-          //   "person",
-          //   "add",
-          //   {
-          //     person: {
-          //       name: formData.name,
-          //       surname: formData.surname,
-          //       patronymic: formData.npatronymicme,
-          //       phone: formData.phone,
-          //       email: formData.email,
-          //       password: formData.password,
-          //       roleId: 3,
-          //     },
-          //   },
-          //   (response) => {
-          //     console.log("response message", response);
-          //   },
-          //   (error) => {
-          //     console.log(error);
-          //   }
-          // );
-      console.log(formData);
-    }
   },
 });
 </script>

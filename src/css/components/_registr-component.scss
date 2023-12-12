@@ -1,20 +1,20 @@
 .registr-component {
 
-  width:100%;
-  height:100%;
+  // width:100%;
+  // height:100%;
   display:flex;
   align-items:center;
   justify-content:center;
   //background: linear-gradient(#dddddd, #a06f6f);
-    background: rgb(215, 230, 235);
 
-  .q-card {
+  .q-dialog__content {
     width: 460px;
     height: auto;
     border-radius: 16px;
     display:flex;
     align-items:center;
     justify-content:center;
+
   }
   h4{
     font-weight: bold;
@@ -30,12 +30,15 @@
     width:100%;
   }
   .q-btn {
-    width:100%;
+    width:40%;
     height:56px;
     font-weight: bold;
     letter-spacing: 3px;
     margin-bottom: 20px;
   }
 
+  }
 
-}
+
+
+

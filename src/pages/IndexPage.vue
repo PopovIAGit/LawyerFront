@@ -37,6 +37,7 @@
         <Settings/>
       </div >
 
+      <registr-component/>
     </diV>
   </q-page>
 </template>
@@ -55,6 +56,7 @@ import ClientArchVue from "src/components/Client/ClientArch.vue";
 import AdminOperatorVue from "src/components/Admin/AdminOperator.vue";
 import ClientTicketOpen from "src/components/Client/ClientTicketOpen.vue";
 
+import RegistrComponent from "src/components/RegistrComponent.vue";
 
 export default defineComponent({
   name: "IndexPage",
@@ -76,7 +78,8 @@ export default defineComponent({
     ClientStartVue,
     ClientArchVue,
     ClientTicketOpen,
-    Settings
+    Settings,
+    RegistrComponent,
   },
 
   methods: {

@@ -43,7 +43,7 @@
                 color="primary"
                 :disable="loading"
                 label="Добавить администратора"
-                @click="addClient"
+                @click="onClickAddAdmin"
               />
             </div>
           </div>
@@ -178,8 +178,40 @@ export default defineComponent({
   },
 
   methods: {
-    addClient() {
-      // Логика добавления новой строки
+    onClickAddAdmin() {
+          this.$q.regStore.set({
+            show: true,
+            title: "Добавить администратора",
+            ok:{
+              label:"Добавить",
+              fn: () =>{
+                      console.log("some data",this.$q.regStore.data),
+                      this.$q.ws.call(
+                        "person",
+                        "add",
+                        {
+                          person: {
+                            name: this.$q.regStore.data.name,
+                            surname: this.$q.regStore.data.surname,
+                            patronymic: this.$q.regStore.data.npatronymicme,
+                            phone: this.$q.regStore.data.phone,
+                            email: this.$q.regStore.data.email,
+                            password: this.$q.regStore.data.password,
+                            roleId: 1,
+                          },
+                        },
+                        (response) => {
+                          console.log("response of add message", response);
+                        },
+                        (error) => {
+                          console.log( "errror of add message",error);
+                        }
+                      );
+                      this.$q.regStore.show = false;
+                    }
+                  },
+                  cancel:{ }
+                })
     },
     getStatusColor(status) {
       return status === "active" ? "activ-cell" : "unactiv-cell";
