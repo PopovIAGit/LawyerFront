@@ -96,7 +96,6 @@
       </q-table>
     </div>
   </div>
-  <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, nisi. Consequatur, repellendus! Nesciunt, maiores iusto!</h1>
 </template>
 <script>
 import { defineComponent, ref } from "vue";

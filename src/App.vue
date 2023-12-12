@@ -82,6 +82,7 @@ export default defineComponent({
     else {
       this.$q.appStore.ready = true;
     }
+    
   },
 
   components:{

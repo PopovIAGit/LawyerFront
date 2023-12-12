@@ -22,38 +22,38 @@
     <div class="sideBar-menu">
       <div v-if="this.$q.appStore.user.roleId == 3" class="ClientMenu">
         <q-list bordered separator>
-          <q-item clickable v-ripple @click="setMenuState(1)" :class="{'active': getMenuState() === 1}">
+          <q-item clickable v-ripple to="/" :class="{'active' : $route.path === '/'}">
             <q-item-section>Начальная страница</q-item-section>
           </q-item>
-          <q-item clickable v-ripple @click="setMenuState(2)" :class="{'active': getMenuState() === 2 || getMenuState() === 5}">
+          <q-item clickable v-ripple to="/clientTicket" :class="{'active':  $route.path === '/clientTicket' ||  $route.path === '/clientTicketOpen'  }">
             <q-item-section>Тикеты</q-item-section>
           </q-item>
-          <q-item clickable v-ripple @click="setMenuState(3)" :class="{'active': getMenuState() === 3}">
+          <q-item clickable v-ripple to="/clientArch" :class="{'active' : $route.path === '/clientArch'}">
             <q-item-section>Архив</q-item-section>
           </q-item>
-          <q-item clickable v-ripple @click="setMenuState(4)" :class="{'active': getMenuState() === 4}">
+          <q-item clickable v-ripple to="/settings" :class="{'active' : $route.path === '/settings'}">
             <q-item-section>Настройки</q-item-section>
           </q-item>
         </q-list>
       </div>
       <div v-else-if="this.$q.appStore.user.roleId < 3" class="ClientMenu">
         <q-list bordered separator>
-          <q-item clickable v-ripple @click="setMenuState(10)" :class="{'active': getMenuState() === 10}">
+          <q-item clickable v-ripple to="/" :class="{'active' : $route.path === '/'}">
             <q-item-section>Начальная страница</q-item-section>
           </q-item>
-          <q-item clickable v-ripple @click="setMenuState(11)" :class="{'active': getMenuState() === 11}">
+          <q-item clickable v-ripple to="/adminTicket" :class="{'active' : $route.path === '/adminTicket'}">
             <q-item-section>Тикеты</q-item-section>
           </q-item>
-          <q-item clickable v-ripple @click="setMenuState(12)" :class="{'active': getMenuState() === 12}">
+          <q-item clickable v-ripple to="/adminClient" :class="{'active' : $route.path === '/adminClient'}">
             <q-item-section>Клиенты</q-item-section>
           </q-item>
-          <q-item clickable v-ripple @click="setMenuState(13)" :class="{'active': getMenuState() === 13}">
+          <q-item clickable v-ripple to="/adminOperator" :class="{'active' : $route.path === '/adminOperator'}">
             <q-item-section>Операторы</q-item-section>
           </q-item>
-          <q-item clickable v-ripple @click="setMenuState(14)" :class="{'active': getMenuState() === 14}">
+          <q-item clickable v-ripple to="/adminAdmin" :class="{'active' : $route.path === '/adminAdmin'}">
             <q-item-section>Администраторы</q-item-section>
           </q-item>
-          <q-item clickable v-ripple @click="setMenuState(15)" :class="{'active': getMenuState() === 15}">
+          <q-item clickable v-ripple to="/settings" :class="{'active' : $route.path === '/settings'}">
             <q-item-section>Настройки</q-item-section>
           </q-item>
         </q-list>
@@ -70,13 +70,6 @@ export default defineComponent({
   },
 
   methods: {
-    setMenuState(state) {
-      this.$q.appStore.viewMenuState = state;
-    },
-    getMenuState(){
-        return this.$q.appStore.viewMenuState;
-    },
-
     getRoleText() {
       const roleId = this.$q.appStore.user.roleId;
       const name = this.$q.appStore.user.name;

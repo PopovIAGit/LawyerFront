@@ -5,19 +5,156 @@
   flex-direction: column;
 
   .containerForClient{
-
     flex: 1;
     display: flex;
-    .client{
+    .ClientStartPage {
+      background-color: rgb(215, 230, 235);
+      width: 100%;
+      height: 100%;
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      .ClientContainer {
+        padding: 16px;
+        .my-card {
+        }
+      }
+      .custom-avatar {
+        position: relative;
+      }
+      .custom-avatar::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.4
+        ); /* Adjust the transparency and color of the mask as desired */
+        z-index: 10;
+      }
+
+      .custom-avatar img {
+        position: relative;
+        z-index: 1;
+      }
     }
   }
   .containerForAdmin{
-
     flex: 1;
     display: flex;
-    .admin{
+
+    .AdminStartPage {
+      background-color: rgb(215, 230, 235);
+      width: 100%;
+      height: 100%;
       flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between; /* Выравнивание по краям */
+
+          .operatorContainer {
+            display: flex;
+            flex-direction: row;
+            order: -1; /* Перемещаем в начало элементов */
+            .operatorOnline {
+              max-height: 160px;
+              .q-card {
+                height: 150px;
+              }
+            }
+          }
+
+          .ticketContainer {
+            order: 10;
+            /* Перемещаем в конец элементов */
+            display: flex;
+            flex-direction: row;
+            .ticketNumber {
+              max-height: 160px;
+              .cardSectionRow {
+                height: 110px;
+              }
+            }
+          }
+        }
+      }
+
+      h4 {
+        text-align: left;
+        /* сверху | справа | снизу | слева */
+        margin: 20px 0 20px auto;
+        font-weight: 700;
+        font-size: 36px;
+        line-height: normal;
+      }
+
+      .activ-cell {
+        // background-color: #DCEDC8;
+        color: #2bcd28;
+      }
+
+      .unactiv-cell {
+        // background-color:#FFCDD3;
+        color: red;
+      }
+
+      .online {
+        margin: 0;
+        display: flex;
+        flex-direction: row;
+
+        .q-item-label {
+          margin: 0;
+        }
+      }
+
+      .my-card {
+        max-width: 650px;
+        min-width: auto;
+        margin-bottom: 10px;
+      }
+
+      .custom-avatar {
+        position: relative;
+      }
+
+      .custom-avatar::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.4
+        ); /* Adjust the transparency and color of the mask as desired */
+        z-index: 10;
+      }
+
+      .custom-avatar img {
+        position: relative;
+        z-index: 1;
+      }
     }
+
   }
 }
