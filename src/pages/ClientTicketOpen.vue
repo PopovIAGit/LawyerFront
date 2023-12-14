@@ -1,5 +1,5 @@
 <template>
-  <div class="ClientTicketOpenPages">
+  <q-page class="ClientTicketOpenPages">
     <div class="ClientTicketTitle q-pa-md">
       <h4>Тикет N6</h4>
     </div>
@@ -56,7 +56,7 @@
                 <q-btn
                   color="primary"
                   label="Закрыть тикет"
-                  @click="setMenuState(2)"
+                  @click="redirectToDetails"
                 />
                 <h6 class="text-h6 text-weight-bold">Документы</h6>
                 <q-virtual-scroll
@@ -79,7 +79,9 @@
         </q-card-section>
       </q-card>
     </div>
-  </div>
+
+  </q-page>
+
 </template>
 
 <script>
@@ -107,8 +109,8 @@ export default defineComponent({
   },
 
   methods: {
-    setMenuState(state) {
-      this.$q.appStore.viewMenuState = state;
+    redirectToDetails() {
+      this.$router.push('/clientTicket');
     },
   },
 });

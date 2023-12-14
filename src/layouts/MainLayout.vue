@@ -60,7 +60,7 @@ import SideBarComponent from "src/components/SideBarComponent.vue";
 export default defineComponent({
   name: "MainLayout",
 
-   mounted() {
+  beforeMount() {
     console.log("beforeMount");
     console.log("this.$q.user", this.$q.appStore.user);
     if (this.$q.appStore.user) {
@@ -110,6 +110,23 @@ export default defineComponent({
         ok: {
           label: "Выйти",
           fn: () => {
+            this.$q.ws.call(
+              "person",
+              "logout",
+              null,
+              // {
+              //   person: {
+              //     id: this.$q.appStore.user.id,
+              //   },
+              // },
+              (response) => {
+                console.log("response logout", response);
+              },
+              // error
+              (error) => {
+                console.log("error", error);
+              }
+            );
             localStorage.removeItem("token");
             this.$q.appStore.user = null;
             this.$q.dialogStore.show = false;

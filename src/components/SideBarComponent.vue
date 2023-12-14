@@ -22,7 +22,7 @@
     <div class="sideBar-menu">
       <div v-if="this.$q.appStore.user.roleId == 3" class="ClientMenu">
         <q-list bordered separator>
-          <q-item clickable v-ripple to="/" :class="{'active' : $route.path === '/'}">
+          <q-item clickable v-ripple to="/" :class="{'active' : $route.path === '/'}" exact>
             <q-item-section>Начальная страница</q-item-section>
           </q-item>
           <q-item clickable v-ripple to="/clientTicket" :class="{'active':  $route.path === '/clientTicket' ||  $route.path === '/clientTicketOpen'  }">
@@ -38,7 +38,7 @@
       </div>
       <div v-else-if="this.$q.appStore.user.roleId < 3" class="ClientMenu">
         <q-list bordered separator>
-          <q-item clickable v-ripple to="/" :class="{'active' : $route.path === '/'}">
+          <q-item clickable v-ripple to="/" :class="{'active' : $route.path === '/'}" exact>
             <q-item-section>Начальная страница</q-item-section>
           </q-item>
           <q-item clickable v-ripple to="/adminTicket" :class="{'active' : $route.path === '/adminTicket'}">

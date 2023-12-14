@@ -1,17 +1,20 @@
 <template>
-  <div class="AdminClientPage">
+  <q-page class="AdminClientPage">
     <div class="q-pa-md">
       <q-table
         bordered
         title="Клиенты"
-        :rows="rows"
         :columns="columns"
+        :rows="data"
         :filter="filterName"
         row-key="name"
         color="primary"
+        :loading="loading"
       >
         <template #body-cell-status="props">
-          <q-td :class="getStatusColor(props.row.status)">{{ props.value }} </q-td>
+          <q-td :class="getStatusColor(props.row.online)"
+            >{{ props.value }}
+          </q-td>
         </template>
 
         <template v-slot:top>
@@ -53,13 +56,10 @@
           </template> -->
       </q-table>
     </div>
-
-  </div>
+  </q-page>
 </template>
 <script>
 import { defineComponent, ref } from "vue";
-
-
 
 const columns = [
   {
@@ -67,8 +67,7 @@ const columns = [
     required: true,
     label: "ФИО",
     align: "left",
-    field: (row) => row.name,
-    format: (val) => `${val}`,
+    field: "name",
     sortable: true,
   },
   {
@@ -86,86 +85,19 @@ const columns = [
     sortable: true,
   },
   { name: "addres", label: "Адрес", align: "left", field: "addres" },
-  { name: "status", label: "Статус", align: "left", field: "status" },
+  { name: "status", label: "Статус", align: "left", field: "online" },
   { name: "tickets", label: "Тикетов", align: "left", field: "tickets" },
-];
-
-const rows = [
-  {
-    name: "Смирнов Андрей Викторович",
-    phone: "+7(000) 000 0000",
-    email: "my@mail.com",
-    addres: "some addres",
-    status: "active",
-    tickets: 12,
-  },
-  {
-    name: "Смирнов Сергей Викторович",
-    phone: "+7(000) 000 0000",
-    email: "my@mail.com",
-    addres: "some addres",
-    status: "unactive",
-    tickets: 12,
-  },
-  {
-    name: "Смирнов Вадим Викторович",
-    phone: "+7(000) 000 0000",
-    email: "my@mail.com",
-    addres: "some addres",
-    status: "unactive",
-    tickets: 12,
-  },
-  {
-    name: "Смирнов Иван Викторович",
-    phone: "+7(000) 000 0000",
-    email: "my@mail.com",
-    addres: "some addres",
-    status: "active",
-    tickets: 12,
-  },
-  {
-    name: "Смирнов Руслан Викторович",
-    phone: "+7(000) 000 0000",
-    email: "my@mail.com",
-    addres: "some addres",
-    status: "active",
-    tickets: 12,
-  },
-  {
-    name: "Смирнов Игорь Викторович",
-    phone: "+7(000) 000 0000",
-    email: "my@mail.com",
-    addres: "some addres",
-    status: "active",
-    tickets: 12,
-  },
-  {
-    name: "Смирнов Андрей Викторович",
-    phone: "+7(000) 000 0000",
-    email: "my@mail.com",
-    addres: "some addres",
-    status: "active",
-    tickets: 12,
-  },
-  {
-    name: "Смирнов Андрей Викторович",
-    phone: "+7(000) 000 0000",
-    email: "my@mail.com",
-    addres: "some addres",
-    status: "active",
-    tickets: 12,
-  },
 ];
 
 export default defineComponent({
   name: "AdminClientPage",
-  components: {
+  components: {},
 
-  },
   setup() {
     return {
       columns,
-      rows,
+      data: ref([]),
+      loading: ref(true),
       addClient: ref(false),
       filterName: ref(""),
       filterStatus: ref("активные"),
@@ -184,46 +116,84 @@ export default defineComponent({
   },
 
   methods: {
-
     onClickAddClient() {
-          this.$q.regStore.set({
-            show: true,
-            title: "Добавить клиента",
-            ok:{
-              label:"Добавить",
-              fn: () =>{
-                      console.log("some data",this.$q.regStore.data),
-                      this.$q.ws.call(
-                        "person",
-                        "add",
-                        {
-                          person: {
-                            name: this.$q.regStore.data.name,
-                            surname: this.$q.regStore.data.surname,
-                            patronymic: this.$q.regStore.data.npatronymicme,
-                            phone: this.$q.regStore.data.phone,
-                            email: this.$q.regStore.data.email,
-                            password: this.$q.regStore.data.password,
-                            roleId: 3,
-                          },
-                        },
-                        (response) => {
-                          console.log("response message", response);
-                        },
-                        (error) => {
-                          console.log(error);
-                        }
-                      );
-                      this.$q.regStore.show = false;
-                    }
+      console.log("some onClickAddClient");
+      this.$q.regStore.set({
+        show: true,
+        title: "Добавить клиента",
+        ok: {
+          label: "Добавить",
+          fn: () => {
+            console.log("some data", this.$q.regStore.data),
+              this.$q.ws.call(
+                "person",
+                "add",
+                {
+                  person: {
+                    name: this.$q.regStore.data.name,
+                    surname: this.$q.regStore.data.surname,
+                    patronymic: this.$q.regStore.data.patronymic,
+                    phone: this.$q.regStore.data.phone,
+                    email: this.$q.regStore.data.email,
+                    password: this.$q.regStore.data.password,
+                    roleId: 3,
                   },
-                  cancel:{ }
-                })
+                },
+                (response) => {
+                  console.log("response message", response);
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+            this.$q.regStore.show = false;
+          },
+        },
+        cancel: {},
+      });
     },
 
     getStatusColor(status) {
-      return status === "active" ? "activ-cell" : "unactiv-cell";
+      return status === "online" ? "activ-cell" : "unactiv-cell";
     },
+
+    showClientList() {
+      this.loadData(true);
+    },
+
+    async loadData(refreshLength) {
+      this.loading = true;
+      try {
+        this.$q.ws.call(
+          "person",
+          "getList",
+          null,
+          (response) => {
+            console.log("1", response);
+            this.$q.appStore.userList = response;
+            console.log("2", this.$q.appStore.userList);
+            this.data = this.$q.appStore.userList
+              .filter((user) => user.roleId === 3)
+              .map((user) => ({
+                id: user.id,
+                name: user.name,
+                phone: user.phone,
+                email: user.email,
+                online: user.online,
+              }));
+          },
+          (error) => {
+            console.log("Делаем что то пр не входе", error);
+          }
+        );
+      } catch (err) {
+        // показали ошибку
+      }
+      this.loading = false;
+    },
+  },
+  mounted() {
+    this.showClientList();
   },
 });
 </script>
@@ -276,15 +246,14 @@ export default defineComponent({
     line-height: normal;
   }
 
+  .activ-cell {
+    // background-color: #DCEDC8;
+    color: #2bcd28;
+  }
 
-      .activ-cell {
-        // background-color: #DCEDC8;
-        color: #2BCD28;
-      }
-
-      .unactiv-cell {
-        // background-color:#FFCDD3;
-        color: red;
-      }
+  .unactiv-cell {
+    // background-color:#FFCDD3;
+    color: red;
+  }
 }
 </style>

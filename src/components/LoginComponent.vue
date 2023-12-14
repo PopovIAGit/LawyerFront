@@ -17,6 +17,7 @@
             :placeholder="formattedPlaceholder"
             label="Телефон"
             @update:model-value="formatPhoneNumber"
+            lazy-rules="ondemand"
             :rules="[(val) => val && val.length >= 11]"
           >
             <template v-slot:prepend>
@@ -30,6 +31,7 @@
             v-model="password"
             :type="isPwd ? 'password' : 'text'"
             label="Пароль"
+            lazy-rules="ondemand"
             :rules="[(val) => val && val.length >= 5]"
           >
             <template v-slot:prepend>
@@ -157,22 +159,23 @@ export default defineComponent({
           this.$q.appStore.user = response;
           // Добавляем токен в localStorage
           localStorage.setItem("token", response.token);
-         
 
-          // if(this.$q.appStore.user.roleId < 2){
-          //   this.$q.ws.call(
-          //     "person",
-          //     "getList",
-          //     null,
-          //     (response) => {
-          //       this.$q.appStore.userList = response;
-          //       console.log("1", this.$q.appStore.userList);
-          //     },
-          //     (error) => {
-          //       console.log("Делаем что то пр не входе",error);
-          //     }
-          //   );
-          // }
+
+          if(this.$q.appStore.user.roleId < 2){
+            this.$q.ws.call(
+              "person",
+              "getList",
+              null,
+              (response) => {
+                console.log("1", response);
+                this.$q.appStore.userList = response;
+                console.log("2", this.$q.appStore.userList);
+              },
+              (error) => {
+                console.log("Делаем что то пр не входе",error);
+              }
+            );
+          }
           //     this.$q.ws.call(
           //         "service",
           //         "getGroupList",
@@ -192,7 +195,7 @@ export default defineComponent({
           this.$q.dialogStore.set({
             show: true,
             title: "Ошибка",
-            text: "Ошибка авторизации",
+            text: error.message,
             ok:{
               label:"Ок",
               fn: () =>{

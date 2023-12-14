@@ -1,5 +1,5 @@
 <template>
-  <div class="AdminOperatorPage">
+  <q-page class="AdminOperatorPage">
     <div class="q-pa-md">
       <q-table
         bordered
@@ -11,7 +11,9 @@
         color="primary"
       >
         <template #body-cell-status="props">
-          <q-td :class="getStatusColor(props.row.status)">{{ props.value }} </q-td>
+          <q-td :class="getStatusColor(props.row.status)"
+            >{{ props.value }}
+          </q-td>
         </template>
 
         <template v-slot:top>
@@ -53,7 +55,7 @@
           </template> -->
       </q-table>
     </div>
-  </div>
+  </q-page>
 </template>
 <script>
 import { defineComponent, ref } from "vue";
@@ -179,39 +181,39 @@ export default defineComponent({
 
   methods: {
     onClickAddOperator() {
-          this.$q.regStore.set({
-            show: true,
-            title: "Добавить оператора",
-            ok:{
-              label:"Добавить",
-              fn: () =>{
-                      console.log("some data",this.$q.regStore.data),
-                      this.$q.ws.call(
-                        "person",
-                        "add",
-                        {
-                          person: {
-                            name: this.$q.regStore.data.name,
-                            surname: this.$q.regStore.data.surname,
-                            patronymic: this.$q.regStore.data.npatronymicme,
-                            phone: this.$q.regStore.data.phone,
-                            email: this.$q.regStore.data.email,
-                            password: this.$q.regStore.data.password,
-                            roleId: 2,
-                          },
-                        },
-                        (response) => {
-                          console.log("response of add message", response);
-                        },
-                        (error) => {
-                          console.log( "errror of add message",error);
-                        }
-                      );
-                      this.$q.regStore.show = false;
-                    }
+      this.$q.regStore.set({
+        show: true,
+        title: "Добавить оператора",
+        ok: {
+          label: "Добавить",
+          fn: () => {
+            console.log("some data", this.$q.regStore.data),
+              this.$q.ws.call(
+                "person",
+                "add",
+                {
+                  person: {
+                    name: this.$q.regStore.data.name,
+                    surname: this.$q.regStore.data.surname,
+                    patronymic: this.$q.regStore.data.npatronymicme,
+                    phone: this.$q.regStore.data.phone,
+                    email: this.$q.regStore.data.email,
+                    password: this.$q.regStore.data.password,
+                    roleId: 2,
                   },
-                  cancel:{ }
-                })
+                },
+                (response) => {
+                  console.log("response of add message", response);
+                },
+                (error) => {
+                  console.log("errror of add message", error);
+                }
+              );
+            this.$q.regStore.show = false;
+          },
+        },
+        cancel: {},
+      });
     },
     getStatusColor(status) {
       return status === "active" ? "activ-cell" : "unactiv-cell";
@@ -268,15 +270,14 @@ export default defineComponent({
     line-height: normal;
   }
 
+  .activ-cell {
+    // background-color: #DCEDC8;
+    color: #2bcd28;
+  }
 
-      .activ-cell {
-        // background-color: #DCEDC8;
-        color: #2BCD28;
-      }
-
-      .unactiv-cell {
-        // background-color:#FFCDD3;
-        color: red;
-      }
+  .unactiv-cell {
+    // background-color:#FFCDD3;
+    color: red;
+  }
 }
 </style>

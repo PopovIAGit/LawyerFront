@@ -26,7 +26,7 @@
         :columns="columns"
         class="q-ma-md ellipsis"
         row-key="name"
-        @row-click="setMenuState(5)"
+        @row-click="redirectToDetails"
       >
         <template #body-cell-operator="props">
           <q-td>
@@ -112,7 +112,9 @@ export default defineComponent({
     };
   },
   methods: {
-
+    redirectToDetails() {
+      this.$router.push('/clientTicketOpen');
+    },
   },
 });
 </script>

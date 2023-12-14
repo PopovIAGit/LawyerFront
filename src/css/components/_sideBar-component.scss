@@ -45,13 +45,17 @@
     flex: 1; // Занимает доступное пространство
     background-color: #fff;
     min-height: fit-content;
+
+    .q-item:active{
+        color: black;
+    }
   }
 
   .active {
    // background-color: rgb(232, 235, 215);
    border-inline-start: solid 5px $primary;
    color: $primary;
-    font-weight: bold;
+   font-weight: bold;
     /* Добавьте свои стили */
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="AdminAdminPage">
+  <q-page class="AdminAdminPage">
     <div class="q-pa-md">
       <q-table
         bordered
@@ -53,7 +53,9 @@
           </template> -->
       </q-table>
     </div>
-  </div>
+
+  </q-page>
+
 </template>
 <script>
 import { defineComponent, ref } from "vue";
@@ -233,6 +235,7 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
 
     .row {
       display: flex;

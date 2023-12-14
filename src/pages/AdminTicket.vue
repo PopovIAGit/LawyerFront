@@ -1,5 +1,5 @@
 <template>
-  <div class="AdminTicketPage">
+    <q-page class="AdminTicketPage">
     <div class="q-pa-md">
       <q-table
         bordered
@@ -95,7 +95,9 @@
           </template> -->
       </q-table>
     </div>
-  </div>
+
+    </q-page>
+
 </template>
 <script>
 import { defineComponent, ref } from "vue";

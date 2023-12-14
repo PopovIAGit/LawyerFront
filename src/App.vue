@@ -69,6 +69,22 @@ export default defineComponent({
           // Указываем в хранилище, что приложение готово, всё нужное сделано
           this.$q.appStore.ready = true;
 
+          if(this.$q.appStore.user.roleId < 2){
+            this.$q.ws.call(
+              "person",
+              "getList",
+              null,
+              (response) => {
+                console.log("1", response);
+                this.$q.appStore.userList = response;
+                console.log("2", this.$q.appStore.userList);
+              },
+              (error) => {
+                console.log("Делаем что то пр не входе",error);
+              }
+            );
+          }
+
         },
         // error
         (error) => {
