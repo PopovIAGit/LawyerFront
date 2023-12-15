@@ -29,12 +29,12 @@ class WsClient {
       this.connection.binaryType = 'arraybuffer';
 
       this.connection.onmessage = (message) => {
-         console.log("Got message", message.data);
+          console.log("Got message from server: " +  message.data);
 
         try {
           if (typeof message.data === 'string') {
             const data = JSON.parse(message.data);
-
+            console.log("data: " +  data);
             switch (data.type) {
               case 'error':
               case 'answer':
@@ -81,6 +81,10 @@ class WsClient {
                 core().catch((err) => {
                   this.error(0, {error: err.message});
                 });
+
+                break;
+                case 'notice':
+                  console.log("notice: " +  data.args);
 
                 break;
               default:
